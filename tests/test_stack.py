@@ -24,3 +24,18 @@ def test_push(data, expected):
     new_node.next_node = stack.top
     stack.top = new_node
     assert stack.top.data == expected
+
+def test_pop():
+    stack = Stack()
+    stack.push('data1')
+    stack.push('data2')
+    stack.push('data3')
+    data = stack.pop()
+    assert stack.top.data == 'data2'
+    assert data == 'data3'
+    data = stack.pop()
+    assert stack.top.data == 'data1'
+    assert data == 'data2'
+    data = stack.pop()
+    assert stack.top is None
+    assert data == 'data1'
