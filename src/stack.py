@@ -39,3 +39,15 @@ class Stack:
         data = self.top.data
         self.top = self.top.next_node
         return data
+
+    def __str__(self):
+        if self.top:
+            current = self.top
+            stack_str = ""
+            while current:
+                stack_str += str(current.data) + "\n"
+                current = current.next_node
+            return stack_str
+        else:
+            return "Стек пуст"
+
