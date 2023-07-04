@@ -4,7 +4,6 @@ class Node:
     def __init__(self, data, next_node=None):
         """
         Конструктор класса Node
-
         :param data: данные, которые будут храниться в узле
         """
         self.data = data
@@ -22,7 +21,6 @@ class Queue:
     def enqueue(self, data):
         """
         Метод для добавления элемента в очередь
-
         :param data: данные, которые будут добавлены в очередь
         """
         new_node = Node(data)
@@ -36,10 +34,15 @@ class Queue:
     def dequeue(self):
         """
         Метод для удаления элемента из очереди. Возвращает данные удаленного элемента
-
         :return: данные удаленного элемента
         """
-        pass
+        if self.head is None:
+            return None
+        data = self.head.data
+        self.head = self.head.next_node
+        if self.head is None:
+            self.tail = None
+        return data
 
     def __str__(self):
         """Магический метод для строкового представления объекта"""
