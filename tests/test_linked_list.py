@@ -45,3 +45,39 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(str(ll), "{'id': 3} -> {'id': 2} -> None")
         ll.insert_at_end({'id': 1})
         self.assertEqual(str(ll), "{'id': 3} -> {'id': 2} -> {'id': 1} -> None")
+
+    def test_to_list(self):
+        ll = LinkedList()
+        ll.insert_beginning({'id': 1, 'username': 'lazzy508509'})
+        self.assertEqual(ll.to_list(), [{'id': 1, 'username': 'lazzy508509'}])
+        ll.insert_at_end({'id': 2, 'username': 'mik.roz'})
+        self.assertEqual(ll.to_list(), [{'id': 1, 'username': 'lazzy508509'}, {'id': 2, 'username': 'mik.roz'}])
+        ll.insert_at_end({'id': 3, 'username': 'mosh_s'})
+        self.assertEqual(ll.to_list(), [
+            {'id': 1, 'username': 'lazzy508509'},
+            {'id': 2, 'username': 'mik.roz'}, {'id': 3, 'username': 'mosh_s'}])
+        ll.insert_beginning({'id': 0, 'username': 'serebro'})
+        self.assertEqual(ll.to_list(), [
+            {'id': 0, 'username': 'serebro'}, {'id': 1, 'username': 'lazzy508509'},
+            {'id': 2, 'username': 'mik.roz'}, {'id': 3, 'username': 'mosh_s'}])
+
+    def test_get_data_by_id(self):
+        ll = LinkedList()
+        ll.insert_beginning({'id': 1, 'username': 'lazzy508509'})
+        ll.insert_at_end({'id': 2, 'username': 'mik.roz'})
+        ll.insert_at_end({'id': 3, 'username': 'mosh_s'})
+        ll.insert_beginning({'id': 0, 'username': 'serebro'})
+        self.assertEqual(ll.get_data_by_id(3), {'id': 3, 'username': 'mosh_s'})
+        self.assertEqual(ll.get_data_by_id(2), {'id': 2, 'username': 'mik.roz'})
+        self.assertEqual(ll.get_data_by_id(1), {'id': 1, 'username': 'lazzy508509'})
+        self.assertEqual(ll.get_data_by_id(0), {'id': 0, 'username': 'serebro'})
+
+    def test_exception_get_data_by_id(self):
+        ll = LinkedList()
+        ll.insert_beginning({'id': 1, 'username': 'lazzy508509'})
+        ll.insert_at_end('idusername')
+        ll.insert_at_end([1, 2, 3])
+        ll.insert_at_end({'id': 2, 'username': 'mosh_s'})
+        self.assertRaises(TypeError, ll.get_data_by_id(2))
+
+
